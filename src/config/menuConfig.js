@@ -5,19 +5,9 @@ const menuList = [
     icon:'home',
   },
   {
-    title:'产业定位',
-    key:'/industry',
-    icon:'user',
-  },
-  {
-    title:'审批流程',
-    key:'/examine',
-    icon:'user',
-  },
-  {
     title:'商品',
-    key:'/mail',
-    icon:'mail',
+    key:'/products',
+    icon:'appstore',
     children:[
       {
         title:'品类管理',
@@ -63,7 +53,24 @@ const menuList = [
         icon:'pie-chart',
       },
     ]
-  }
+  },
+  {
+    title:'工具箱',
+    key:'tools',
+    icon:'tool',
+    children: [
+      {
+        title:'产业定位',
+        key:'/industry',
+        icon:'user',
+      },
+      {
+        title:'审批流程',
+        key:'/examine',
+        icon:'user',
+      },
+    ]
+  },
 
 ]
 export default menuList

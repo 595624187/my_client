@@ -7,15 +7,6 @@ import './index.less'
 
 const SubMenu = Menu.SubMenu
 class LeftNav extends Component {
-  state = {
-    collapsed: false,
-  };
-
-  toggleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
   //根据menu的数据数组生成对应的标签数组
   getMenuNodes_map = (menuList)=>{
     return menuList.map(item=>{
@@ -40,7 +31,7 @@ class LeftNav extends Component {
             }
           >
             {
-              this.getMenuNodes_map(item.children)
+              this.getMenuNodes(item.children)
             }
           </SubMenu>
         )
@@ -63,22 +54,24 @@ class LeftNav extends Component {
         ))
       }else{
         const cItem = item.children.find(cItem=>cItem.key===path)
-        if(cItem) this.openKey = item.key
-          pre.push((
-            <SubMenu
-            key={item.key}
-            title={
-              <span>
-                <Icon type={item.icon} />
-                <span>{item.title}</span>
-              </span>
-            }
-          >
-            {
-              this.getMenuNodes(item.children)
-            }
-          </SubMenu>
-          ))
+        if(cItem){
+          this.openKey = item.key
+        }
+        pre.push((
+          <SubMenu
+          key={item.key}
+          title={
+            <span>
+              <Icon type={item.icon} />
+              <span>{item.title}</span>
+            </span>
+          }
+        >
+          {
+            this.getMenuNodes(item.children)
+          }
+        </SubMenu>
+        ))
       }
       //向pre添加<SubMenu>
       return pre
@@ -92,9 +85,11 @@ class LeftNav extends Component {
 
   render() {
     //得到当前请求的路由路径
-    // console.log(this);
-    const path = this.props.location.pathname
+    let path = this.props.location.pathname
     const openKey = this.openKey
+    if(path.indexOf('/product')===0){//当前请求的是商品或其子路由的j界面
+      path='/product'
+    }
     return (
       <div className="left-nav">
         <Link to='/admin'className="left-nav-header">
@@ -102,11 +97,10 @@ class LeftNav extends Component {
           <h1>wcy管理系统</h1>
         </Link>
         <Menu
-            selectedKeys={[path]}
-            defaultOpenKeys={[openKey]}
             mode="inline"
             theme="dark"
-            inlineCollapsed={this.state.collapsed}
+            selectedKeys={[path]}
+            defaultOpenKeys={[openKey]}
           >
             {
               this.menuNodes

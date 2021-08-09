@@ -178,7 +178,6 @@ export default class Category extends Component {
         rowKey='_id'
         loading={loading}
         pagination={{defaultPageSize:5,showQuickJumper:true}}
-
         >
         </Table>
         

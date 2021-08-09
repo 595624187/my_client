@@ -14,11 +14,11 @@ class industry extends Component {
     getMenuNodes = (industryList)=>{
         return industryList.map(item=>{
             return(
-                <div className="item">
+                <div className="item" key={item.id}>
                     <div className="item-title">{item.title}</div>
                     {item.children.map((res,index)=>{
                         return(
-                            <div classNmae="item-content">
+                            <div classNmae="item-content" item={index.id}>
                                  {(index+1)+'.'+res.detail}
                             </div>
                         )
@@ -27,13 +27,13 @@ class industry extends Component {
             )
         })
     }
-    getTitle = (industryList)=>{
-        return industryList.map(item=>{
-            // console.log(item.title);
-            return <Option value={item.title}>{item.title}</Option>
-
-        })
-    }
+    // getTitle = (industryList)=>{
+    //     return industryList.map(item=>{
+    //         // console.log(item.title);
+    //         return <Option value={item.title}>{item.title}</Option>
+    //
+    //     })
+    // }
     handleSub=()=>{
         const {currentOption} = this.state
         console.log({currentOption});
@@ -95,19 +95,19 @@ class industry extends Component {
         return (
             <div className="industry">
                 <Descriptions title="说明" className="industry-disc">
-                    <Descriptions.Item>1.文件格式：.xlsx、.xls、.csv</Descriptions.Item>
-                    <Descriptions.Item>2.结果通过邮箱发送</Descriptions.Item>
-                    <Descriptions.Item>3.因邮件附件大小限制，原始文件列数不要太多</Descriptions.Item>
+                    <Descriptions.Item key='1'>1.文件格式：.xlsx、.xls、.csv</Descriptions.Item>
+                    <Descriptions.Item key='2'>2.结果通过邮箱发送</Descriptions.Item>
+                    <Descriptions.Item key='3'>3.因邮件附件大小限制，原始文件列数不要太多</Descriptions.Item>
                 </Descriptions>
                 <Descriptions title="格式要求">
-                    <Descriptions.Item>
+                    <Descriptions.Item key='1'>
                         {
                             this.menuNodes
                         }
                     </Descriptions.Item>
                 </Descriptions>
                 <Descriptions title="定位维度*">
-                    <Descriptions.Item>
+                    <Descriptions.Item key='1'>
                     <Select
                         showSearch
                         style={{ width: 200 }}
@@ -122,7 +122,7 @@ class industry extends Component {
                         {
                             industryList.map(item=>{
                                 return(
-                                    <Option value={item.title}>{item.title}</Option>
+                                    <Option value={item.title} key={item.title}>{item.title}</Option>
                                 )
                             })
                         }
@@ -131,7 +131,7 @@ class industry extends Component {
                     </Descriptions.Item>
                 </Descriptions>
                 <Descriptions title="文件*">
-                    <Descriptions.Item>
+                    <Descriptions.Item key='1'>
                         <Upload {...props}>
                             <Button style={{marginRight:20}}>
                               <Icon type="upload" /> 点击选择文件
